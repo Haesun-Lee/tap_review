@@ -17,8 +17,10 @@ class _ReviewPageState extends State<ReviewPage> {
           title: Text('Review Page'),
         ),
         body: Center(
-          child: Image(
-              image: AssetImage('assets/Fries.jpeg'),
-        ));
+            child: Image.asset(
+          'assets/Fries.jpeg',
+          height: 200,
+          width: 300,
+        )));
   }
 }
