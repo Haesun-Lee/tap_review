@@ -37,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: const Text('TapReview'),
+        title: const Text('Main Page'),
         centerTitle: true,
         titleTextStyle: const TextStyle(fontSize: 30, color: Colors.white),
         toolbarHeight: 80,
