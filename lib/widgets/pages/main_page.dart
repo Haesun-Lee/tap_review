@@ -15,6 +15,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Main Page'),
+          backgroundColor: Color(0xFF525288),
         ),
         body: Center(
           child: Column(
@@ -30,7 +31,7 @@ class _MainPageState extends State<MainPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    backgroundColor: Colors.indigo,
+                    backgroundColor: Color(0xFF525288),
                     foregroundColor: Colors.white,
                     textStyle: const TextStyle(fontSize: 25)),
               ),
@@ -47,7 +48,7 @@ class _MainPageState extends State<MainPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    backgroundColor: Colors.indigo,
+                    backgroundColor: Color(0xFF525288),
                     foregroundColor: Colors.white,
                     textStyle: const TextStyle(fontSize: 25)),
               ),
