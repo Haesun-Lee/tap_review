@@ -1,5 +1,6 @@
+// ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
-import 'package:tap_review/widgets/pages/main_page.dart';
+import 'package:tap_review/routes/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,12 +9,11 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MainPage(),
-      //onGenerateRoute: ,
+      initialRoute: RouteManager.homePage,
+      onGenerateRoute: RouteManager.generateRoute,
     );
   }
 }
