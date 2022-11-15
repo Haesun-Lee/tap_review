@@ -12,7 +12,7 @@ class ReviewDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(review.menu_name)),
+        appBar: AppBar(title: Text(review.menu_name), backgroundColor: Color(0xFFd52b1c),),
         body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
