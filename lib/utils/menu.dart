@@ -33,12 +33,13 @@ List<Menu> MenuList = [
       rating: 4),
   Menu(
       menu_name: 'Steamed Beef',
-      description: 'This is very delicious fries made by Daeun',
+      description:
+          'This is very delicious Pyon Baek steam(shabu-shabu) made by Daeun',
       imageUrl: 'assets/Steamed.jpeg',
       rating: 4),
   Menu(
       menu_name: 'Oil Pasta',
-      description: 'This is a Homemade pasta made by Kahye',
+      description: 'This is a Homemade oil pasta made by Kahye',
       imageUrl: 'assets/Oil_Pasta.jpeg',
       rating: 3),
   Menu(
@@ -48,7 +49,7 @@ List<Menu> MenuList = [
       rating: 1),
   Menu(
       menu_name: 'Lamb Skewer',
-      description: 'This is very delicious lab skewers by Kochi Maru',
+      description: 'This is very delicious lamb skewers by Kochi Maru',
       imageUrl: 'assets/Lamb.jpeg',
       rating: 5),
   Menu(
