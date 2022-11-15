@@ -12,7 +12,7 @@ class _OrderSuccessPageState extends State<OrderSuccessPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Order Success Page')),
+      appBar: AppBar(title: Text('Order Success Page'), backgroundColor: Color(0xFFd52b1c),),
     );
   }
 }
