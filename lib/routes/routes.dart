@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:tap_review/widgets/pages/main_page.dart';
 
-import '../widgets/pages/menu_detail.dart';
+//import '../widgets/pages/menu_detail.dart';
 import '../widgets/pages/menu_order_page.dart';
 import '../widgets/pages/menu_page.dart';
 import '../widgets/pages/order_success_page.dart';
@@ -14,7 +14,7 @@ class RouteManager {
   static const String reviewPage = '/reviewpage';
   static const String reviewSuccessPage = '/reviewsuccesspage';
   static const String menuPage = '/menupage';
-  static const String menuDetailPage = '/menudetailpage';
+  //static const String menuDetailPage = '/menudetailpage';
   static const String menuOrderPage = '/menuorderpage';
   static const String orderSuccessPage = '/ordersuccesspage';
 
@@ -40,10 +40,10 @@ class RouteManager {
           builder: (context) => MenuPage(),
         );
 
-      case menuDetailPage:
-        return MaterialPageRoute(
-          builder: (context) => MenuDetailPage(),
-        );
+//      case menuDetailPage:
+//        return MaterialPageRoute(
+//          builder: (context) => MenuDetailPage(),
+//        );
 
       case menuOrderPage:
         return MaterialPageRoute(
