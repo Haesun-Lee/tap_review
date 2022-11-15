@@ -17,7 +17,7 @@ class _ReviewPageState extends State<ReviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Review Page')),
+      appBar: AppBar(title: Text('Review Page'), backgroundColor: Color(0xFFd52b1c),),
       body: ListView.builder(
         itemCount: reviewList.length,
         itemBuilder: (context, index) {
