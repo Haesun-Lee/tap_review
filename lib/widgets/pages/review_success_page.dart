@@ -12,7 +12,7 @@ class _ReviewSuccessPageState extends State<ReviewSuccessPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Review Success Page')),
+      appBar: AppBar(title: Text('Review Success Page'), backgroundColor: Color(0xFFd52b1c),),
     );
   }
 }
