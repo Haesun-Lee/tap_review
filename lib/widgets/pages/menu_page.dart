@@ -16,7 +16,7 @@ class _MenuPageState extends State<MenuPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Menu Page')),
+      appBar: AppBar(title: Text('Menu Page'), backgroundColor: Color(0xFFd52b1c),),
       body: ListView.builder(
         itemCount: MenuList.length,
         itemBuilder: (context, index) {
