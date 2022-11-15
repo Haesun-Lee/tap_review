@@ -12,7 +12,7 @@ class _MenuOrderPageState extends State<MenuOrderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Menu Order Page')),
+      appBar: AppBar(title: Text('Menu Order Page'), backgroundColor: Color(0xFFd52b1c),),
     );
   }
 }
