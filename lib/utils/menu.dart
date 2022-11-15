@@ -49,7 +49,7 @@ List<Menu> MenuList = [
       rating: 1),
   Menu(
       menu_name: 'Lamb Skewer',
-      description: 'This is very delicious lamb skewers by Kochi Maru',
+      description: 'This is a very delicious lamb skewers by Kochi Maru',
       imageUrl: 'assets/Lamb.jpeg',
       rating: 5),
   Menu(

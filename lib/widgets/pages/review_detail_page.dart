@@ -2,28 +2,30 @@
 import 'package:flutter/material.dart';
 import 'package:tap_review/utils/menu.dart';
 
-class MenuDetailPage extends StatelessWidget {
+import '../../utils/review.dart';
+
+class ReviewDetailPage extends StatelessWidget {
   //const MenuDetailPage({super.key});
-  final Menu menu;
-  MenuDetailPage(this.menu);
+  final Review review;
+  ReviewDetailPage(this.review);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(menu.menu_name)),
+        appBar: AppBar(title: Text(review.menu_name)),
         body: Padding(
-            padding: const EdgeInsets.all(18.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  menu.imageUrl,
+                  review.imageUrl,
                   fit: BoxFit.fill,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'Rating : ' + menu.rating.toString(),
+                    'comment : ',
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontSize: 17.0, fontStyle: FontStyle.italic),
@@ -32,7 +34,7 @@ class MenuDetailPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'Description : \n' + menu.description,
+                    'Description : \n' + review.description,
                     textAlign: TextAlign.justify,
                     style: TextStyle(fontSize: 15.0),
                   ),

@@ -22,17 +22,23 @@ class _MenuPageState extends State<MenuPage> {
         itemBuilder: (context, index) {
           Menu menu = MenuList[index];
           return Card(
-            child: ListTile(
-              title: Text(menu.menu_name),
-              subtitle: Text(menu.rating.toString()),
-              leading: Image.asset(menu.imageUrl),
-              trailing: Icon(Icons.arrow_forward_ios_rounded),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MenuDetailPage(menu)));
-              },
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: ListTile(
+                title: Text(menu.menu_name),
+                subtitle: Text(menu.rating.toString()),
+                leading: Image.asset(
+                  menu.imageUrl,
+                  width: 70,
+                ),
+                trailing: Icon(Icons.arrow_forward_ios_rounded),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MenuDetailPage(menu)));
+                },
+              ),
             ),
           );
         },
