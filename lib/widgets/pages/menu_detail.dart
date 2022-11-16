@@ -82,7 +82,7 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                 Row(
                   children: <Widget>[
                   SizedBox(
-                    width: 10,
+                    width: 15,
                   ),
                   Row(
                     children: [

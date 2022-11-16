@@ -46,8 +46,8 @@ class _MenuOrderPageState extends State<MenuOrderPage> {
                 children: [
                   Image.asset(
                     'assets/Bacon.jpeg', 
-                    height: 80, 
-                    width: 80
+                    height: 70, 
+                    width: 70
                   ),
                   SizedBox(
                     width: 5.0,

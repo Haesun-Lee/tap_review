@@ -58,7 +58,7 @@ class _OrderSuccessPageState extends State<OrderSuccessPage> {
                     child: ElevatedButton(
                       child: Text(
                         'Back to Main Page',
-                        style: TextStyle(fontSize: 16.0),
+                        style: TextStyle(fontSize: 15.0),
                       ),
                       onPressed: () {
                         Navigator.of(context).pushNamed(RouteManager.homePage);
