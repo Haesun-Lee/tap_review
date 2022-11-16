@@ -81,8 +81,10 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                   height: 150,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
+                  SizedBox(
+                    width: 10,
+                  ),
                   Row(
                     children: [
                       FloatingActionButton.small(
@@ -108,6 +110,9 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                         backgroundColor: Color(0xD9d52b1c),
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    width: 40,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
