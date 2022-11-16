@@ -17,6 +17,18 @@ class MenuDetailPage extends StatefulWidget {
 class _MenuDetailPageState extends State<MenuDetailPage> {
   int _counter = 0;
 
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      _counter--;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,9 +79,39 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                 SizedBox(
                   height: 150,
                 ),
-                Row(children: <Widget>[
+                Row(
+                  children: <Widget>[
                   SizedBox(
                     width: 20,
+                  ),
+                  Row(
+                    children: [
+                      FloatingActionButton.small(
+                        onPressed: _decrementCounter,
+                        tooltip: 'Decrement',
+                        child: Icon(Icons.remove),
+                        backgroundColor: Color(0xD9d52b1c),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        '$_counter',
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      FloatingActionButton.small(
+                        onPressed: _incrementCounter,
+                        tooltip: 'Increment',
+                        child: Icon(Icons.add),
+                        backgroundColor: Color(0xD9d52b1c),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 40,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
