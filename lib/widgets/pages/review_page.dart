@@ -163,7 +163,7 @@ _bottomSheet(context) {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(18.0),
                     child: ElevatedButton(
                       onPressed: () {
                         //print(_TextController.text);
