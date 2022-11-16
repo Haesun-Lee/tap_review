@@ -25,33 +25,33 @@ List<Menu> MenuList = [
       price: 8,
       rating: 3.0),
   Menu(
-      menu_name: 'Pasta',
+      menu_name: 'Feta Cheese Pasta',
       description: 'This is a Homemade pasta made by GT turtle',
       imageUrl: 'assets/Pasta.jpeg',
       price: 15,
       rating: 5.0),
   Menu(
-      menu_name: 'Salad',
+      menu_name: 'Ricotta Cheese Salad',
       description: 'This is a Salad that I had back in Korea',
       imageUrl: 'assets/Salad.jpeg',
       price: 12,
       rating: 4.2),
   Menu(
-      menu_name: 'Steamed Beef',
+      menu_name: 'Pyon Baek Steamed Beef',
       description:
           'This is very delicious Pyon Baek steam(shabu-shabu) made by Daeun',
       imageUrl: 'assets/Steamed.jpeg',
       price: 25,
       rating: 4.1),
   Menu(
-      menu_name: 'Oil Pasta',
+      menu_name: 'Tomato Oil Pasta',
       description: 'This is a Homemade oil pasta made by Kahye',
       imageUrl: 'assets/Oil_Pasta.jpeg',
       price: 11,
       rating: 3.2),
   Menu(
       menu_name: 'Sweet Potato Fries',
-      description: 'This is a Sweet potato fries by Dink Tea',
+      description: 'This is a Sweet potato fries by Ding Tea',
       imageUrl: 'assets/SweetPotato.jpeg',
       price: 9,
       rating: 1.0),
