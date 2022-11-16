@@ -25,8 +25,9 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
 
   void _decrementCounter() {
     setState(() {
-      _counter--;
-    });
+      if(_counter > 0 )
+        _counter--;
+      });
   }
 
   @override
@@ -80,10 +81,8 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                   height: 150,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                  SizedBox(
-                    width: 20,
-                  ),
                   Row(
                     children: [
                       FloatingActionButton.small(
@@ -93,14 +92,14 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                         backgroundColor: Color(0xD9d52b1c),
                       ),
                       SizedBox(
-                        width: 10,
+                        width: 15,
                       ),
                       Text(
                         '$_counter',
-                        style: TextStyle(fontSize: 15.0),
+                        style: TextStyle(fontSize: 20.0),
                       ),
                       SizedBox(
-                        width: 10,
+                        width: 15,
                       ),
                       FloatingActionButton.small(
                         onPressed: _incrementCounter,
@@ -109,9 +108,6 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                         backgroundColor: Color(0xD9d52b1c),
                       ),
                     ],
-                  ),
-                  SizedBox(
-                    width: 40,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
@@ -124,7 +120,7 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                         Navigator.of(context).pushNamed(RouteManager.menuPage);
                       },
                       style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(130, 50),
+                          fixedSize: const Size(120, 50),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
