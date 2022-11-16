@@ -53,7 +53,7 @@ class MenuDetailPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 170,
+                  height: 150,
                 ),
                 Row(children: <Widget>[
                   SizedBox(
