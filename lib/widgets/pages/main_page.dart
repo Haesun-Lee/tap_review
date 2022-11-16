@@ -13,6 +13,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text('Main Page'),
           backgroundColor: Color(0xFFd52b1c),
@@ -21,7 +22,7 @@ class _MainPageState extends State<MainPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/Fries.jpeg', height: 300, width: 300),
+              Image.asset('assets/wnfc.jpeg', height: 300, width: 300, color: Colors.white.withOpacity(0.85), colorBlendMode: BlendMode.modulate,),
               SizedBox(
                 height: 5,
               ),
