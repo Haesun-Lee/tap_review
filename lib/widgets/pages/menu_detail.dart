@@ -25,9 +25,8 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
 
   void _decrementCounter() {
     setState(() {
-      if(_counter > 0 )
-        _counter--;
-      });
+      if (_counter > 0) _counter--;
+    });
   }
 
   @override
@@ -81,55 +80,56 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                   height: 150,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                  Row(
-                    children: [
-                      FloatingActionButton.small(
-                        onPressed: _decrementCounter,
-                        tooltip: 'Decrement',
-                        child: Icon(Icons.remove),
-                        backgroundColor: Color(0xD9d52b1c),
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        '$_counter',
-                        style: TextStyle(fontSize: 20.0),
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      FloatingActionButton.small(
-                        onPressed: _incrementCounter,
-                        tooltip: 'Increment',
-                        child: Icon(Icons.add),
-                        backgroundColor: Color(0xD9d52b1c),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: ElevatedButton(
-                      child: Text(
-                        'Add to cart',
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(RouteManager.menuPage);
-                      },
-                      style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(120, 50),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Row(
+                        children: [
+                          FloatingActionButton.small(
+                            onPressed: _decrementCounter,
+                            tooltip: 'Decrement',
+                            child: Icon(Icons.remove),
+                            backgroundColor: Color(0xD9d52b1c),
                           ),
-                          backgroundColor: Color(0xD9d52b1c),
-                          foregroundColor: Colors.white,
-                          textStyle: const TextStyle(fontSize: 25)),
-                    ),
-                  ),
-                ]),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Text(
+                            '$_counter',
+                            style: TextStyle(fontSize: 20.0),
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          FloatingActionButton.small(
+                            onPressed: _incrementCounter,
+                            tooltip: 'Increment',
+                            child: Icon(Icons.add),
+                            backgroundColor: Color(0xD9d52b1c),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: ElevatedButton(
+                          child: Text(
+                            'Add to cart',
+                            style: TextStyle(fontSize: 16.0),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushNamed(RouteManager.menuPage);
+                          },
+                          style: ElevatedButton.styleFrom(
+                              fixedSize: const Size(120, 50),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              backgroundColor: Color(0xD9d52b1c),
+                              foregroundColor: Colors.white,
+                              textStyle: const TextStyle(fontSize: 25)),
+                        ),
+                      ),
+                    ]),
               ],
             )));
   }
