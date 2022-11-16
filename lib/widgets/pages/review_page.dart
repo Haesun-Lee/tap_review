@@ -71,7 +71,7 @@ _bottomSheet(context) {
                   ),
                   ListTile(
                     leading: Text(
-                      'Food',
+                      'Food    ',
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
@@ -123,7 +123,7 @@ _bottomSheet(context) {
                   ),
                   ListTile(
                     leading: Text(
-                      'Overall',
+                      'Overall ',
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
@@ -165,7 +165,9 @@ _bottomSheet(context) {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        //print(_TextController.text);
+                      },
                       child: Text('Submit'),
                     ),
                   ),
