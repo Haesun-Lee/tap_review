@@ -17,17 +17,24 @@ class _ReviewPageState extends State<ReviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Review Page'), backgroundColor: Color(0xFFd52b1c),),
+      appBar: AppBar(
+        title: Text('Review Page'),
+        backgroundColor: Color(0xFFd52b1c),
+      ),
       body: ListView.builder(
         itemCount: reviewList.length,
         itemBuilder: (context, index) {
           Review review = reviewList[index];
           return Card(
             child: ListTile(
-              title: Text(review.menu_name),
+              title: Text(
+                review.menu_name,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               subtitle: Text(review.description),
               leading: Image.asset(review.imageUrl),
-              trailing: Icon(Icons.arrow_forward_ios_rounded),
+              trailing: Icon(Icons.arrow_forward_ios_rounded,
+                  color: Color(0xFFd52b1c)),
               onTap: () {
                 Navigator.push(
                     context,

@@ -16,7 +16,10 @@ class _MenuPageState extends State<MenuPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Menu Page'), backgroundColor: Color(0xFFd52b1c),),
+      appBar: AppBar(
+        title: Text('Menu Page'),
+        backgroundColor: Color(0xFFd52b1c),
+      ),
       body: ListView.builder(
         itemCount: MenuList.length,
         itemBuilder: (context, index) {
@@ -25,13 +28,22 @@ class _MenuPageState extends State<MenuPage> {
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: ListTile(
-                title: Text(menu.menu_name),
+                title: Text(
+                  menu.menu_name,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 subtitle: Text(menu.rating.toString()),
                 leading: Image.asset(
                   menu.imageUrl,
                   width: 70,
                 ),
-                trailing: Icon(Icons.arrow_forward_ios_rounded),
+                trailing: Text(
+                  menu.price.toString(),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.0,
+                      color: Colors.redAccent),
+                ),
                 onTap: () {
                   Navigator.push(
                       context,
