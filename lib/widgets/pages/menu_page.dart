@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:tap_review/utils/menu.dart';
 import 'package:tap_review/widgets/pages/menu_detail.dart';
 
@@ -28,17 +29,32 @@ class _MenuPageState extends State<MenuPage> {
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: ListTile(
-                title: Text(
-                  menu.menu_name,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                title: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    menu.menu_name,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
-                subtitle: Text(menu.rating.toString()),
+                subtitle: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RatingBarIndicator(
+                    itemBuilder: (context, index) => Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                    itemCount: 5,
+                    itemSize: 15.0,
+                    direction: Axis.horizontal,
+                  ),
+                ),
                 leading: Image.asset(
                   menu.imageUrl,
                   width: 70,
                 ),
+                isThreeLine: true,
                 trailing: Text(
-                  menu.price.toString(),
+                  '\$' + menu.price.toString(),
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0,
