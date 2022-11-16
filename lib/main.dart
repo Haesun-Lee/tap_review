@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:tap_review/routes/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-Future<void> main() async {
-  await Firebase.initializeApp();
+void main() {
+  //await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
