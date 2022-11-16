@@ -33,13 +33,8 @@ class _ReviewPageState extends State<ReviewPage> {
               ),
               subtitle: Text(review.description),
               leading: Image.asset(review.imageUrl),
-              trailing: Icon(Icons.arrow_forward_ios_rounded,
-                  color: Color(0xFFd52b1c)),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ReviewDetailPage(review)));
+                _bottomSheet(context);
               },
             ),
           );
@@ -47,4 +42,50 @@ class _ReviewPageState extends State<ReviewPage> {
       ),
     );
   }
+}
+
+_bottomSheet(context) {
+  showModalBottomSheet(
+      context: context,
+      builder: (BuildContext c) {
+        return Wrap(
+          children: [
+            Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
+                      'Review',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Divider(
+                    height: 2.0,
+                  ),
+                  ListTile(
+                    leading: Text(
+                      'Rating',
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
+                    title: Text('title'),
+                  ),
+                  Divider(
+                    height: 2.0,
+                  ),
+                  ListTile(
+                    leading: Text('leaing'),
+                    title: Text('title'),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      });
 }
