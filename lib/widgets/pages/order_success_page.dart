@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
+import '../../routes/routes.dart';
 
 class OrderSuccessPage extends StatefulWidget {
   const OrderSuccessPage({super.key});
@@ -18,7 +19,13 @@ class _OrderSuccessPageState extends State<OrderSuccessPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget> [
-              Image.asset('assets/check.jpeg', height:150, width: 150, color: Colors.white.withOpacity(0.9), colorBlendMode: BlendMode.modulate,),
+              Image.asset(
+                'assets/check.jpeg', 
+                height:150, 
+                width: 150, 
+                color: Colors.white.withOpacity(0.9), 
+                colorBlendMode: BlendMode.modulate,
+              ),
               SizedBox(
                 height: 20,
               ),
@@ -44,8 +51,31 @@ class _OrderSuccessPageState extends State<OrderSuccessPage> {
                 )
               ),
               SizedBox(
-                height: 5,
+                height: 50,
               ),
+              Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: ElevatedButton(
+                      child: Text(
+                        'Back to Main Page',
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(RouteManager.homePage);
+                      },
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(250, 50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          backgroundColor: Color(0xD9d52b1c),
+                          foregroundColor: Colors.white,
+                          textStyle: const TextStyle(
+                            fontSize: 25, 
+                            fontWeight: FontWeight.bold
+                          )),
+                    ),
+                ),
             ]
           )
         )
