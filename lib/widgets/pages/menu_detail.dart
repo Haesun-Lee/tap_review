@@ -25,9 +25,8 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
 
   void _decrementCounter() {
     setState(() {
-      if(_counter > 0 )
-        _counter--;
-      });
+      if (_counter > 0) _counter--;
+    });
   }
 
   @override
@@ -129,12 +128,10 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          backgroundColor: Color(0xD9d52b1c),
-                          foregroundColor: Colors.white,
-                          textStyle: const TextStyle(fontSize: 25)),
+                      ),
                     ),
                   ),
-                ]),
+                    ]),
               ],
             )));
   }
