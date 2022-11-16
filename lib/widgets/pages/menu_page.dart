@@ -39,6 +39,7 @@ class _MenuPageState extends State<MenuPage> {
                 subtitle: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: RatingBarIndicator(
+                    rating: menu.rating,
                     itemBuilder: (context, index) => Icon(
                       Icons.star,
                       color: Colors.amber,

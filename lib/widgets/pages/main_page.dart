@@ -22,7 +22,13 @@ class _MainPageState extends State<MainPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/wnfc.jpeg', height: 300, width: 300, color: Colors.white.withOpacity(0.85), colorBlendMode: BlendMode.modulate,),
+              Image.asset(
+                'assets/wnfc.jpeg',
+                height: 300,
+                width: 300,
+                color: Colors.white.withOpacity(0.85),
+                colorBlendMode: BlendMode.modulate,
+              ),
               SizedBox(
                 height: 5,
               ),
