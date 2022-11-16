@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:tap_review/utils/menu.dart';
 import 'package:tap_review/widgets/pages/menu_detail.dart';
-
+import 'package:tap_review/utils/review.dart';
 import '../../routes/routes.dart';
 
 class MenuPage extends StatefulWidget {
@@ -25,6 +25,7 @@ class _MenuPageState extends State<MenuPage> {
         itemCount: MenuList.length,
         itemBuilder: (context, index) {
           Menu menu = MenuList[index];
+
           return Card(
             child: Padding(
               padding: const EdgeInsets.all(5.0),
