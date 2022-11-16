@@ -37,7 +37,7 @@ List<Menu> MenuList = [
       price: 12,
       rating: 4.2),
   Menu(
-      menu_name: 'Pyon Baek Steamed Beef',
+      menu_name: 'Pyon Baek Steamed',
       description:
           'This is very delicious Pyon Baek steam(shabu-shabu) made by Daeun',
       imageUrl: 'assets/Steamed.jpeg',
