@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:tap_review/utils/review.dart';
 import 'package:tap_review/widgets/pages/menu_detail.dart';
 import 'package:tap_review/widgets/pages/review_detail_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../routes/routes.dart';
 
@@ -35,7 +36,7 @@ class _ReviewPageState extends State<ReviewPage> {
               subtitle: Text(review.description),
               leading: Image.asset(review.imageUrl),
               onTap: () {
-                _bottomSheet(context);
+                _bottomSheet(context, review.menu_name);
               },
             ),
           );
@@ -45,8 +46,14 @@ class _ReviewPageState extends State<ReviewPage> {
   }
 }
 
-_bottomSheet(context) {
+_bottomSheet(context, reviewName) {
+  CollectionReference reviews = FirebaseFirestore.instance.collection('review');
   final TextEditingController _TextController = TextEditingController();
+  double sum = 0;
+  // bool food = false;
+  // bool service = false;
+  // bool overall = false;
+
   showModalBottomSheet(
       context: context,
       builder: (BuildContext c) {
@@ -59,7 +66,7 @@ _bottomSheet(context) {
                   Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Text(
-                      'Review',
+                      reviewName,
                       style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
@@ -78,7 +85,7 @@ _bottomSheet(context) {
                     title: RatingBar.builder(
                       itemSize: 25,
                       initialRating: 0,
-                      minRating: 0,
+                      minRating: 1,
                       direction: Axis.horizontal,
                       allowHalfRating: true,
                       itemCount: 5,
@@ -89,6 +96,7 @@ _bottomSheet(context) {
                       ),
                       onRatingUpdate: (rating) {
                         print(rating);
+                        sum += rating;
                       },
                     ),
                   ),
@@ -104,7 +112,7 @@ _bottomSheet(context) {
                     title: RatingBar.builder(
                       itemSize: 25,
                       initialRating: 0,
-                      minRating: 0,
+                      minRating: 1,
                       direction: Axis.horizontal,
                       allowHalfRating: true,
                       itemCount: 5,
@@ -115,6 +123,7 @@ _bottomSheet(context) {
                       ),
                       onRatingUpdate: (rating) {
                         print(rating);
+                        sum += rating;
                       },
                     ),
                   ),
@@ -130,7 +139,7 @@ _bottomSheet(context) {
                     title: RatingBar.builder(
                       itemSize: 25,
                       initialRating: 0,
-                      minRating: 0,
+                      minRating: 1,
                       direction: Axis.horizontal,
                       allowHalfRating: true,
                       itemCount: 5,
@@ -141,6 +150,7 @@ _bottomSheet(context) {
                       ),
                       onRatingUpdate: (rating) {
                         print(rating);
+                        sum += rating;
                       },
                     ),
                   ),
@@ -165,8 +175,15 @@ _bottomSheet(context) {
                   Padding(
                     padding: const EdgeInsets.all(18.0),
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         //print(_TextController.text);
+                        await reviews.add({
+                          'name': reviewName,
+                          'rating': sum / 3,
+                          'review': _TextController.text,
+                        });
+                        sum = 0;
+                        Navigator.pop(context);
                       },
                       child: Text('Submit'),
                     ),
