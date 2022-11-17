@@ -169,6 +169,17 @@ _bottomSheet(context) {
                         //print(_TextController.text);
                       },
                       child: Text('Submit'),
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(120, 30),
+                          shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          ),
+                          backgroundColor: Color(0xD9d52b1c),
+                          foregroundColor: Colors.white,
+                          textStyle: const TextStyle(
+                            fontSize: 17, 
+                            fontWeight: FontWeight.bold
+                      )),
                     ),
                   ),
                 ],

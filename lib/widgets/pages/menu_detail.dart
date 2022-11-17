@@ -124,11 +124,16 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                         Navigator.of(context).pushNamed(RouteManager.menuPage);
                       },
                       style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(120, 50),
+                          fixedSize: const Size(120, 40),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(20),
                           ),
-                      ),
+                          backgroundColor: Color(0xD9d52b1c),
+                          foregroundColor: Colors.white,
+                          textStyle: const TextStyle(
+                            fontSize: 17, 
+                            fontWeight: FontWeight.bold
+                      )),
                     ),
                   ),
                     ]),
