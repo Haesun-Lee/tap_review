@@ -7,6 +7,7 @@ import 'package:tap_review/widgets/pages/review_detail_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../routes/routes.dart';
+import '../../utils/get_what_to_review.dart';
 
 class ReviewPage extends StatefulWidget {
   const ReviewPage({super.key});
@@ -16,33 +17,53 @@ class ReviewPage extends StatefulWidget {
 }
 
 class _ReviewPageState extends State<ReviewPage> {
+  final review = FirebaseFirestore.instance.collection('cart');
+
+  List<String> reviewID = [];
+
+  Future getReviewID() async {
+    await FirebaseFirestore.instance.collection('cart').get().then(
+          (snapshot) => snapshot.docs.forEach((document) {
+            print(document.reference);
+            reviewID.add(document.reference.id);
+          }),
+        );
+  }
+
+  // void initState() {
+  //   getReviewID();
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Review Page'),
-        backgroundColor: Color(0xFFd52b1c),
-      ),
-      body: ListView.builder(
-        itemCount: reviewList.length,
-        itemBuilder: (context, index) {
-          Review review = reviewList[index];
-          return Card(
-            child: ListTile(
-              title: Text(
-                review.menu_name,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text(review.description),
-              leading: Image.asset(review.imageUrl),
-              onTap: () {
-                _bottomSheet(context, review.menu_name);
+        appBar: AppBar(
+          title: Text('Review Page'),
+          backgroundColor: Color(0xFFd52b1c),
+        ),
+        body: FutureBuilder(
+          future: getReviewID(),
+          builder: (context, snapshot) {
+            return ListView.builder(
+              itemCount: reviewID.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  child: ListTile(
+                    title: GetWhatToReview(
+                      documentId: reviewID[index],
+                    ),
+                    subtitle: Text(reviewID[index]),
+                    leading: Image.asset(reviewID[index]),
+                    onTap: () {
+                      _bottomSheet(context, reviewID[index]);
+                    },
+                  ),
+                );
               },
-            ),
-          );
-        },
-      ),
-    );
+            );
+          },
+        ));
   }
 }
 
@@ -189,14 +210,12 @@ _bottomSheet(context, reviewName) {
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size(120, 30),
                           shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                           backgroundColor: Color(0xD9d52b1c),
                           foregroundColor: Colors.white,
                           textStyle: const TextStyle(
-                            fontSize: 17, 
-                            fontWeight: FontWeight.bold
-                      )),
+                              fontSize: 17, fontWeight: FontWeight.bold)),
                     ),
                   ),
                 ],
