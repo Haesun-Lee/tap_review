@@ -4,49 +4,77 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:tap_review/utils/review.dart';
 import 'package:tap_review/widgets/pages/menu_detail.dart';
 import 'package:tap_review/widgets/pages/review_detail_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../routes/routes.dart';
+import '../../utils/get_what_to_review.dart';
 
 class ReviewPage extends StatefulWidget {
   const ReviewPage({super.key});
-
+//d
   @override
   State<ReviewPage> createState() => _ReviewPageState();
 }
 
 class _ReviewPageState extends State<ReviewPage> {
+  final review = FirebaseFirestore.instance.collection('cart');
+
+  List<String> reviewID = [];
+
+  Future getReviewID() async {
+    await FirebaseFirestore.instance.collection('cart').get().then(
+          (snapshot) => snapshot.docs.forEach((document) {
+            print(document.reference);
+            reviewID.add(document.reference.id);
+          }),
+        );
+  }
+
+  // void initState() {
+  //   getReviewID();
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Review Page'),
-        backgroundColor: Color(0xFFd52b1c),
-      ),
-      body: ListView.builder(
-        itemCount: reviewList.length,
-        itemBuilder: (context, index) {
-          Review review = reviewList[index];
-          return Card(
-            child: ListTile(
-              title: Text(
-                review.menu_name,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text(review.description),
-              leading: Image.asset(review.imageUrl),
-              onTap: () {
-                _bottomSheet(context);
+        appBar: AppBar(
+          title: Text('Review Page'),
+          backgroundColor: Color(0xFFd52b1c),
+        ),
+        body: FutureBuilder(
+          future: getReviewID(),
+          builder: (context, snapshot) {
+            return ListView.builder(
+              itemCount: reviewID.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  child: ListTile(
+                    title: GetWhatToReview(
+                      documentId: reviewID[index],
+                    ),
+                    subtitle: Text(reviewID[index]),
+                    leading: Image.asset(reviewID[index]),
+                    onTap: () {
+                      _bottomSheet(context, reviewID[index]);
+                    },
+                  ),
+                );
               },
-            ),
-          );
-        },
-      ),
-    );
+            );
+          },
+        ));
   }
 }
 
-_bottomSheet(context) {
+_bottomSheet(context, reviewName) {
+  CollectionReference reviews = FirebaseFirestore.instance.collection('review');
   final TextEditingController _TextController = TextEditingController();
+  double sum = 0;
+  // bool food = false;
+  // bool service = false;
+  // bool overall = false;
+
   showModalBottomSheet(
       context: context,
       builder: (BuildContext c) {
@@ -59,7 +87,7 @@ _bottomSheet(context) {
                   Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Text(
-                      'Review',
+                      reviewName,
                       style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
@@ -78,7 +106,7 @@ _bottomSheet(context) {
                     title: RatingBar.builder(
                       itemSize: 25,
                       initialRating: 0,
-                      minRating: 0,
+                      minRating: 1,
                       direction: Axis.horizontal,
                       allowHalfRating: true,
                       itemCount: 5,
@@ -89,6 +117,7 @@ _bottomSheet(context) {
                       ),
                       onRatingUpdate: (rating) {
                         print(rating);
+                        sum += rating;
                       },
                     ),
                   ),
@@ -104,7 +133,7 @@ _bottomSheet(context) {
                     title: RatingBar.builder(
                       itemSize: 25,
                       initialRating: 0,
-                      minRating: 0,
+                      minRating: 1,
                       direction: Axis.horizontal,
                       allowHalfRating: true,
                       itemCount: 5,
@@ -115,6 +144,7 @@ _bottomSheet(context) {
                       ),
                       onRatingUpdate: (rating) {
                         print(rating);
+                        sum += rating;
                       },
                     ),
                   ),
@@ -130,7 +160,7 @@ _bottomSheet(context) {
                     title: RatingBar.builder(
                       itemSize: 25,
                       initialRating: 0,
-                      minRating: 0,
+                      minRating: 1,
                       direction: Axis.horizontal,
                       allowHalfRating: true,
                       itemCount: 5,
@@ -141,6 +171,7 @@ _bottomSheet(context) {
                       ),
                       onRatingUpdate: (rating) {
                         print(rating);
+                        sum += rating;
                       },
                     ),
                   ),
@@ -163,23 +194,28 @@ _bottomSheet(context) {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(18.0),
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         //print(_TextController.text);
+                        await reviews.add({
+                          'name': reviewName,
+                          'rating': sum / 3,
+                          'review': _TextController.text,
+                        });
+                        sum = 0;
+                        Navigator.pop(context);
                       },
                       child: Text('Submit'),
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size(120, 30),
                           shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                           backgroundColor: Color(0xD9d52b1c),
                           foregroundColor: Colors.white,
                           textStyle: const TextStyle(
-                            fontSize: 17, 
-                            fontWeight: FontWeight.bold
-                      )),
+                              fontSize: 17, fontWeight: FontWeight.bold)),
                     ),
                   ),
                 ],
