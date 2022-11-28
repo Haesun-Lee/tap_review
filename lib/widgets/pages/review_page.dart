@@ -20,6 +20,7 @@ class ReviewPage extends StatefulWidget {
 class _ReviewPageState extends State<ReviewPage> {
   final review = FirebaseFirestore.instance.collection('cart');
 
+
   final Stream<QuerySnapshot> reviewList =
       FirebaseFirestore.instance.collection('cart').snapshots();
 
@@ -71,6 +72,25 @@ class _ReviewPageState extends State<ReviewPage> {
                   },
                 );
               }).toList(),
+        body: FutureBuilder(
+          future: getReviewID(),
+          builder: (context, snapshot) {
+            return ListView.builder(
+              itemCount: reviewID.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  child: ListTile(
+                    title: GetWhatToReview(
+                      documentId: reviewID[index],
+                    ),
+                    subtitle: Text(reviewID[index]),
+                    leading: Image.asset(reviewID[index]),
+                    onTap: () {
+                      _bottomSheet(context, reviewID[index]);
+                    },
+                  ),
+                );
+              },
             );
           },
         ));
@@ -110,6 +130,7 @@ _bottomSheet(context, reviewName) {
                   ListTile(
                     leading: Text(
                       'Taste           ',
+
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
@@ -164,6 +185,62 @@ _bottomSheet(context, reviewName) {
                   ListTile(
                     leading: Text(
                       'Appearance',
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
+                    title: RatingBar.builder(
+                      itemSize: 25,
+                      initialRating: 0,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (rating) {
+                        print(rating);
+                        sum += rating;
+                      },
+                    ),
+                  ),
+                  Divider(
+                    height: 2.0,
+                  ),
+                  ListTile(
+                    leading: Text(
+                      'Portion        ',
+                      'Speed          ',
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
+                    title: RatingBar.builder(
+                      itemSize: 25,
+                      initialRating: 0,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (rating) {
+                        print(rating);
+                        sum += rating;
+                      },
+                    ),
+                  ),
+                  Divider(
+                    height: 2.0,
+                  ),
+                  ListTile(
+                    leading: Text(
+                      'Appearance',
+                      'Overall         ',
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
