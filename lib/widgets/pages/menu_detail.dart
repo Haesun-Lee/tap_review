@@ -7,8 +7,11 @@ import '../../routes/routes.dart';
 
 class MenuDetailPage extends StatefulWidget {
   //const MenuDetailPage({super.key});
-  final Menu menu;
-  MenuDetailPage(this.menu);
+  String menuName;
+  String description;
+  String imageUrl;
+  double rating;
+  MenuDetailPage(this.menuName, this.description, this.imageUrl, this.rating);
 
   @override
   State<MenuDetailPage> createState() => _MenuDetailPageState();
@@ -33,7 +36,7 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text(widget.menu.menu_name),
+            title: Text(widget.menuName),
             backgroundColor: Color(0xFFd52b1c),
             actions: <Widget>[
               IconButton(
@@ -49,14 +52,15 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  widget.menu.imageUrl,
+                Image.network(
+                  widget.imageUrl,
                   fit: BoxFit.fill,
+                  height: 200,
                 ),
                 Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: RatingBarIndicator(
-                      rating: widget.menu.rating,
+                      rating: widget.rating,
                       itemBuilder: (context, index) => Icon(
                         Icons.star,
                         color: Colors.amber,
@@ -68,7 +72,7 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'Description : \n' + widget.menu.description,
+                    'Description : \n' + widget.description,
                     textAlign: TextAlign.justify,
                     style: TextStyle(
                         fontSize: 15.0,
@@ -79,8 +83,7 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                 SizedBox(
                   height: 150,
                 ),
-                Row(
-                  children: <Widget>[
+                Row(children: <Widget>[
                   SizedBox(
                     width: 15,
                   ),
@@ -121,22 +124,20 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                         style: TextStyle(fontSize: 16.0),
                       ),
                       onPressed: () {
-                        Navigator.of(context).pushNamed(RouteManager.menuPage);
+                        Navigator.of(context).pop();
                       },
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size(120, 40),
                           shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                           backgroundColor: Color(0xD9d52b1c),
                           foregroundColor: Colors.white,
                           textStyle: const TextStyle(
-                            fontSize: 17, 
-                            fontWeight: FontWeight.bold
-                      )),
+                              fontSize: 17, fontWeight: FontWeight.bold)),
                     ),
                   ),
-                    ]),
+                ]),
               ],
             )));
   }

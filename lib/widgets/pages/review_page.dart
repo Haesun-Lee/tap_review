@@ -67,7 +67,7 @@ class _ReviewPageState extends State<ReviewPage> {
                   subtitle: Text(data['description']),
                   leading: Image.network(data['imageUrl']),
                   onTap: () {
-                    _bottomSheet(context, data['name']);
+                    _bottomSheet(context, data['name'], getReviewID());
                   },
                 );
               }).toList(),
@@ -77,7 +77,7 @@ class _ReviewPageState extends State<ReviewPage> {
   }
 }
 
-_bottomSheet(context, reviewName) {
+_bottomSheet(context, reviewName, reviewID) {
   CollectionReference reviews = FirebaseFirestore.instance.collection('review');
   final TextEditingController _TextController = TextEditingController();
   double sum = 0;
@@ -126,7 +126,6 @@ _bottomSheet(context, reviewName) {
                         color: Colors.amber,
                       ),
                       onRatingUpdate: (rating) {
-                        print(rating);
                         sum += rating;
                       },
                     ),
@@ -153,7 +152,6 @@ _bottomSheet(context, reviewName) {
                         color: Colors.amber,
                       ),
                       onRatingUpdate: (rating) {
-                        print(rating);
                         sum += rating;
                       },
                     ),
@@ -234,7 +232,6 @@ _bottomSheet(context, reviewName) {
                         color: Colors.amber,
                       ),
                       onRatingUpdate: (rating) {
-                        print(rating);
                         sum += rating;
                       },
                     ),
