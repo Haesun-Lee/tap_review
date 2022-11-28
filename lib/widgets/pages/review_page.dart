@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+// import 'package:tap_review/utils/DatabaseManager.dart';
 import 'package:tap_review/utils/review.dart';
 import 'package:tap_review/widgets/pages/menu_detail.dart';
 import 'package:tap_review/widgets/pages/review_detail_page.dart';
@@ -18,6 +19,10 @@ class ReviewPage extends StatefulWidget {
 
 class _ReviewPageState extends State<ReviewPage> {
   final review = FirebaseFirestore.instance.collection('cart');
+
+
+  final Stream<QuerySnapshot> reviewList =
+      FirebaseFirestore.instance.collection('cart').snapshots();
 
   List<String> reviewID = [];
 
@@ -42,6 +47,31 @@ class _ReviewPageState extends State<ReviewPage> {
           title: Text('Review Page'),
           backgroundColor: Color(0xFFd52b1c),
         ),
+        body: StreamBuilder<QuerySnapshot>(
+          stream: reviewList,
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return Text('Something went wrong');
+            }
+
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Text("Loading");
+            }
+
+            return ListView(
+              children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                Map<String, dynamic> data =
+                    document.data()! as Map<String, dynamic>;
+                return ListTile(
+                  title: Text(data['name']),
+                  subtitle: Text(data['description']),
+                  leading: Image.network(data['imageUrl']),
+                  onTap: () {
+                    _bottomSheet(context, data['name']);
+                  },
+                );
+              }).toList(),
         body: FutureBuilder(
           future: getReviewID(),
           builder: (context, snapshot) {
@@ -100,6 +130,7 @@ _bottomSheet(context, reviewName) {
                   ListTile(
                     leading: Text(
                       'Taste           ',
+
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
@@ -180,6 +211,7 @@ _bottomSheet(context, reviewName) {
                   ),
                   ListTile(
                     leading: Text(
+                      'Portion        ',
                       'Speed          ',
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
@@ -207,7 +239,35 @@ _bottomSheet(context, reviewName) {
                   ),
                   ListTile(
                     leading: Text(
+                      'Appearance',
                       'Overall         ',
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
+                    title: RatingBar.builder(
+                      itemSize: 25,
+                      initialRating: 0,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (rating) {
+                        print(rating);
+                        sum += rating;
+                      },
+                    ),
+                  ),
+                  Divider(
+                    height: 2.0,
+                  ),
+                  ListTile(
+                    leading: Text(
+                      'Speed          ',
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
