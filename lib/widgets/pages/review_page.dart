@@ -109,7 +109,7 @@ _bottomSheet(context, reviewName) {
                   ),
                   ListTile(
                     leading: Text(
-                      'Food    ',
+                      'Taste                   ',
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
@@ -136,7 +136,7 @@ _bottomSheet(context, reviewName) {
                   ),
                   ListTile(
                     leading: Text(
-                      'Service',
+                      'Portion                ',
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
@@ -163,7 +163,61 @@ _bottomSheet(context, reviewName) {
                   ),
                   ListTile(
                     leading: Text(
-                      'Overall ',
+                      'Appearance        ',
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
+                    title: RatingBar.builder(
+                      itemSize: 25,
+                      initialRating: 0,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (rating) {
+                        print(rating);
+                        sum += rating;
+                      },
+                    ),
+                  ),
+                  Divider(
+                    height: 2.0,
+                  ),
+                  ListTile(
+                    leading: Text(
+                      'Speed of Service',
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
+                    title: RatingBar.builder(
+                      itemSize: 25,
+                      initialRating: 0,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (rating) {
+                        print(rating);
+                        sum += rating;
+                      },
+                    ),
+                  ),
+                  Divider(
+                    height: 2.0,
+                  ),
+                  ListTile(
+                    leading: Text( 
+                      'Overall                  ',
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
