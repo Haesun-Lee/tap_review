@@ -10,9 +10,21 @@ class MenuOrderPage extends StatefulWidget {
   State<MenuOrderPage> createState() => _MenuOrderPageState();
 }
 
+String myID = '';
+List<String> reviewID = [];
+Future getReviewID() async {
+  await FirebaseFirestore.instance.collection('cart').get().then(
+        (snapshot) => snapshot.docs.forEach((document) {
+          myID = document.id.toString();
+          reviewID.add(document.reference.id);
+        }),
+      );
+}
+
 class _MenuOrderPageState extends State<MenuOrderPage> {
   final Stream<QuerySnapshot> cartList =
       FirebaseFirestore.instance.collection('cart').snapshots();
+  int size = 0;
   int _counter = 0;
 
   void _incrementCounter() {
@@ -49,6 +61,8 @@ class _MenuOrderPageState extends State<MenuOrderPage> {
             children: snapshot.data!.docs.map((DocumentSnapshot document) {
               Map<String, dynamic> data =
                   document.data()! as Map<String, dynamic>;
+              size = data.length;
+              getReviewID();
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ListTile(
@@ -72,7 +86,7 @@ class _MenuOrderPageState extends State<MenuOrderPage> {
                         width: 10,
                       ),
                       Text(
-                        '$_counter',
+                        data['count'].toString(),
                         style: TextStyle(
                             fontSize: 15.0, fontWeight: FontWeight.bold),
                       ),
@@ -95,7 +109,14 @@ class _MenuOrderPageState extends State<MenuOrderPage> {
                       IconButton(
                         icon: Icon(Icons.delete),
                         iconSize: 25,
-                        onPressed: () {},
+                        onPressed: () {
+                          print("deleting");
+                          print(myID);
+                          FirebaseFirestore.instance
+                              .collection('cart')
+                              .doc(myID)
+                              .delete();
+                        },
                       ),
                     ],
                   ),
@@ -129,4 +150,8 @@ class _MenuOrderPageState extends State<MenuOrderPage> {
           )),
     );
   }
+}
+
+void deleteCollection(id) {
+  FirebaseFirestore.instance.collection('cart').doc(id).delete();
 }
