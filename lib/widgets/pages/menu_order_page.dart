@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tap_review/widgets/pages/order_success_page.dart';
 
@@ -10,6 +11,8 @@ class MenuOrderPage extends StatefulWidget {
 }
 
 class _MenuOrderPageState extends State<MenuOrderPage> {
+  final Stream<QuerySnapshot> cartList =
+      FirebaseFirestore.instance.collection('cart').snapshots();
   int _counter = 0;
 
   void _incrementCounter() {
@@ -20,78 +23,49 @@ class _MenuOrderPageState extends State<MenuOrderPage> {
 
   void _decrementCounter() {
     setState(() {
-      if(_counter > 0 )
-        _counter--;
-      });
+      if (_counter > 0) _counter--;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('My Shopping Cart'), 
+        title: Text('Order Page'),
         backgroundColor: Color(0xFFd52b1c),
       ),
-      body: 
-        ListView.builder(
-        itemCount: 4,
-        itemBuilder: (context, index){
-          return Card(
-            elevation: 5.0,
-            child: 
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-              child: Row(
-                children: [
-                  Image.asset(
-                    'assets/Bacon.jpeg', 
-                    height: 70, 
-                    width: 70
-                  ),
-                  SizedBox(
-                    width: 5.0,
-                  ),
-                  SizedBox(
-                    width:130,
-                    child: Column(
-                      crossAxisAlignment:CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 5.0,
-                        ),
-                        Text(
-                          'Bacon something',
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5.0,
-                        ),
-                        Text(
-                          '\$7',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Row(
+      body: StreamBuilder<QuerySnapshot>(
+        stream: cartList,
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text('Something went wrong');
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Text("Loading");
+          }
+
+          return ListView(
+            children: snapshot.data!.docs.map((DocumentSnapshot document) {
+              Map<String, dynamic> data =
+                  document.data()! as Map<String, dynamic>;
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListTile(
+                  title: Text(data['name']),
+                  subtitle: Row(
                     children: [
                       SizedBox(
                         width: 10,
                       ),
                       SizedBox(
-                        width:30,
-                        height:30,
+                        width: 30,
+                        height: 30,
                         child: FloatingActionButton.small(
-                        onPressed: _decrementCounter,
-                        tooltip: 'Decrement',
-                        child: Icon(Icons.remove),
-                        backgroundColor: Color(0xD9d52b1c),
+                          onPressed: _decrementCounter,
+                          tooltip: 'Decrement',
+                          child: Icon(Icons.remove),
+                          backgroundColor: Color(0xD9d52b1c),
                         ),
                       ),
                       SizedBox(
@@ -100,21 +74,19 @@ class _MenuOrderPageState extends State<MenuOrderPage> {
                       Text(
                         '$_counter',
                         style: TextStyle(
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.bold
-                        ),
+                            fontSize: 15.0, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         width: 10,
                       ),
                       SizedBox(
-                        width:30,
-                        height:30,
+                        width: 30,
+                        height: 30,
                         child: FloatingActionButton.small(
-                        onPressed: _incrementCounter,
-                        tooltip: 'Increment',
-                        child: Icon(Icons.add),
-                        backgroundColor: Color(0xD9d52b1c),
+                          onPressed: _incrementCounter,
+                          tooltip: 'Increment',
+                          child: Icon(Icons.add),
+                          backgroundColor: Color(0xD9d52b1c),
                         ),
                       ),
                       SizedBox(
@@ -123,37 +95,38 @@ class _MenuOrderPageState extends State<MenuOrderPage> {
                       IconButton(
                         icon: Icon(Icons.delete),
                         iconSize: 25,
-                        onPressed: (){},
+                        onPressed: () {},
                       ),
                     ],
                   ),
-                ],
-              ),
-              ),
+                  leading: Image.network(
+                    data['imageUrl'],
+                    width: 60,
+                  ),
+                  onTap: () {},
+                ),
+              );
+            }).toList(),
           );
-        }
-        ),
-      bottomNavigationBar: InkWell(
-        onTap: (){
-          Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => OrderSuccessPage()));
         },
-        child: Container(
-          color: Color(0xD9d52b1c),
-          alignment: Alignment.center,
-          height: 50,
-          child: Text(
-            'Proceed to Checkout',
-            style: TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.white
-            ),
-          ),
-        )
       ),
+      bottomNavigationBar: InkWell(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => OrderSuccessPage()));
+          },
+          child: Container(
+            color: Color(0xD9d52b1c),
+            alignment: Alignment.center,
+            height: 50,
+            child: Text(
+              'Proceed to Checkout',
+              style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            ),
+          )),
     );
   }
 }

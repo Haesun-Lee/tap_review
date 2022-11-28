@@ -87,10 +87,12 @@ class _MenuPageState extends State<MenuPage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => MenuDetailPage(
-                                data['menu_name'],
-                                data['description'],
-                                data['imageUrl'],
-                                data['rating'])));
+                                  data['menu_name'],
+                                  data['description'],
+                                  data['imageUrl'],
+                                  data['rating'],
+                                  data['price'],
+                                )));
                   },
                 );
               }).toList(),

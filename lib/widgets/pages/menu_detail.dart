@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:tap_review/utils/menu.dart';
@@ -11,13 +12,16 @@ class MenuDetailPage extends StatefulWidget {
   String description;
   String imageUrl;
   double rating;
-  MenuDetailPage(this.menuName, this.description, this.imageUrl, this.rating);
+  int price;
+  MenuDetailPage(
+      this.menuName, this.description, this.imageUrl, this.rating, this.price);
 
   @override
   State<MenuDetailPage> createState() => _MenuDetailPageState();
 }
 
 class _MenuDetailPageState extends State<MenuDetailPage> {
+  CollectionReference cartDB = FirebaseFirestore.instance.collection('cart');
   int _counter = 0;
 
   void _incrementCounter() {
@@ -123,7 +127,16 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                         'Add to cart',
                         style: TextStyle(fontSize: 16.0),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
+                        if (_counter > 0) {
+                          await cartDB.add({
+                            'name': widget.menuName,
+                            'count': _counter,
+                            'imageUrl': widget.imageUrl,
+                            'description': widget.description,
+                            'price': widget.price,
+                          });
+                        }
                         Navigator.of(context).pop();
                       },
                       style: ElevatedButton.styleFrom(
