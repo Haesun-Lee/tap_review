@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "191230875339",
+    "project_id": "tap-review-cb5af",
+    "storage_bucket": "tap-review-cb5af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191230875339:android:18a3acc0b07a68c4aaad4e",
+        "android_client_info": {
+          "package_name": "com.example.tap_review"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "191230875339-nad7363ddnpst8g7fjmdmui6jia1iref.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmh1JM49O2_ahNQL9WvzGGZSZcYgPr-Zk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "191230875339-nad7363ddnpst8g7fjmdmui6jia1iref.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "191230875339-qcq4nffhkape1n39loks6k1ilvirdl1r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tapReview"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
