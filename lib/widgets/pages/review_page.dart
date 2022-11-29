@@ -213,32 +213,6 @@ _bottomSheet(context, reviewName, reviewID) {
                   Divider(
                     height: 2.0,
                   ),
-                  ListTile(
-                    leading: Text( 
-                      'Overall                  ',
-                      style: TextStyle(
-                          fontSize: 18.0, fontWeight: FontWeight.bold),
-                    ),
-                    title: RatingBar.builder(
-                      itemSize: 25,
-                      initialRating: 0,
-                      minRating: 1,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                      itemBuilder: (context, _) => Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                      ),
-                      onRatingUpdate: (rating) {
-                        sum += rating;
-                      },
-                    ),
-                  ),
-                  Divider(
-                    height: 2.0,
-                  ),
                   Padding(
                     padding: const EdgeInsets.all(18.0),
                     child: TextFormField(
@@ -254,30 +228,27 @@ _bottomSheet(context, reviewName, reviewID) {
                           )),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        //print(_TextController.text);
-                        await reviews.add({
-                          'name': reviewName,
-                          'rating': sum / 3,
-                          'review': _TextController.text,
-                        });
-                        sum = 0;
-                        Navigator.pop(context);
-                      },
-                      child: Text('Submit'),
-                      style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(120, 30),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          backgroundColor: Color(0xD9d52b1c),
-                          foregroundColor: Colors.white,
-                          textStyle: const TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.bold)),
-                    ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      //print(_TextController.text);
+                      await reviews.add({
+                        'name': reviewName,
+                        'rating': sum / 4,
+                        'review': _TextController.text,
+                      });
+                      sum = 0;
+                      Navigator.pop(context);
+                    },
+                    child: Text('Submit'),
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: const Size(120, 30),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        backgroundColor: Color(0xD9d52b1c),
+                        foregroundColor: Colors.white,
+                        textStyle: const TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold)),
                   ),
                 ],
               ),
