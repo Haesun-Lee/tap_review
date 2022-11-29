@@ -21,11 +21,19 @@ Future getReviewID() async {
       );
 }
 
+countDocuments() async {
+  QuerySnapshot _myDoc =
+      await FirebaseFirestore.instance.collection('cart').get();
+  List<DocumentSnapshot> _myDocCount = _myDoc.docs;
+  return _myDocCount.length; // Count of Documents in Collection
+}
+
 class _MenuOrderPageState extends State<MenuOrderPage> {
+  int _counter = 0;
   final Stream<QuerySnapshot> cartList =
       FirebaseFirestore.instance.collection('cart').snapshots();
-  int size = 0;
-  int _counter = 0;
+
+  List<int> counter = [];
 
   void _incrementCounter() {
     setState(() {
@@ -61,7 +69,6 @@ class _MenuOrderPageState extends State<MenuOrderPage> {
             children: snapshot.data!.docs.map((DocumentSnapshot document) {
               Map<String, dynamic> data =
                   document.data()! as Map<String, dynamic>;
-              size = data.length;
               getReviewID();
               return Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -86,7 +93,7 @@ class _MenuOrderPageState extends State<MenuOrderPage> {
                         width: 10,
                       ),
                       Text(
-                        data['count'].toString(),
+                        '$_counter',
                         style: TextStyle(
                             fontSize: 15.0, fontWeight: FontWeight.bold),
                       ),
@@ -150,8 +157,4 @@ class _MenuOrderPageState extends State<MenuOrderPage> {
           )),
     );
   }
-}
-
-void deleteCollection(id) {
-  FirebaseFirestore.instance.collection('cart').doc(id).delete();
 }

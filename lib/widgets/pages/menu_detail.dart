@@ -8,13 +8,14 @@ import '../../routes/routes.dart';
 
 class MenuDetailPage extends StatefulWidget {
   //const MenuDetailPage({super.key});
+  int menuNumber;
   String menuName;
   String description;
   String imageUrl;
   double rating;
   int price;
-  MenuDetailPage(
-      this.menuName, this.description, this.imageUrl, this.rating, this.price);
+  MenuDetailPage(this.menuNumber, this.menuName, this.description,
+      this.imageUrl, this.rating, this.price);
 
   @override
   State<MenuDetailPage> createState() => _MenuDetailPageState();
@@ -130,6 +131,7 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                       onPressed: () async {
                         if (_counter > 0) {
                           await cartDB.add({
+                            'menu_number': widget.menuNumber,
                             'name': widget.menuName,
                             'count': _counter,
                             'imageUrl': widget.imageUrl,
