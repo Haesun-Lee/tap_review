@@ -95,7 +95,9 @@ class _MenuOrderPageState extends State<MenuOrderPage> {
                       Text(
                         data['count'].toString(),
                         style: TextStyle(
-                            fontSize: 15.0, fontWeight: FontWeight.bold, color: ),
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       SizedBox(
                         width: 10,
