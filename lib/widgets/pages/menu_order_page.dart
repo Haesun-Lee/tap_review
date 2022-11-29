@@ -93,9 +93,9 @@ class _MenuOrderPageState extends State<MenuOrderPage> {
                         width: 10,
                       ),
                       Text(
-                        '$_counter',
+                        data['count'].toString(),
                         style: TextStyle(
-                            fontSize: 15.0, fontWeight: FontWeight.bold),
+                            fontSize: 15.0, fontWeight: FontWeight.bold, color: ),
                       ),
                       SizedBox(
                         width: 10,
