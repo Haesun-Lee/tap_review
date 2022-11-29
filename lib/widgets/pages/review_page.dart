@@ -105,7 +105,7 @@ _bottomSheet(context, reviewName, reviewID) {
                     ),
                   ),
                   Divider(
-                    height: 2.0,
+                    height: 1.0,
                   ),
                   ListTile(
                     leading: Text(
@@ -131,7 +131,7 @@ _bottomSheet(context, reviewName, reviewID) {
                     ),
                   ),
                   Divider(
-                    height: 2.0,
+                    height: 1.0,
                   ),
                   ListTile(
                     leading: Text(
@@ -157,7 +157,7 @@ _bottomSheet(context, reviewName, reviewID) {
                     ),
                   ),
                   Divider(
-                    height: 2.0,
+                    height: 1.0,
                   ),
                   ListTile(
                     leading: Text(
@@ -184,7 +184,7 @@ _bottomSheet(context, reviewName, reviewID) {
                     ),
                   ),
                   Divider(
-                    height: 2.0,
+                    height: 1.0,
                   ),
                   ListTile(
                     leading: Text(
@@ -211,7 +211,7 @@ _bottomSheet(context, reviewName, reviewID) {
                     ),
                   ),
                   Divider(
-                    height: 2.0,
+                    height: 1.0,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(18.0),
@@ -228,27 +228,30 @@ _bottomSheet(context, reviewName, reviewID) {
                           )),
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      //print(_TextController.text);
-                      await reviews.add({
-                        'name': reviewName,
-                        'rating': sum / 4,
-                        'review': _TextController.text,
-                      });
-                      sum = 0;
-                      Navigator.pop(context);
-                    },
-                    child: Text('Submit'),
-                    style: ElevatedButton.styleFrom(
-                        fixedSize: const Size(120, 30),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        backgroundColor: Color(0xD9d52b1c),
-                        foregroundColor: Colors.white,
-                        textStyle: const TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold)),
+                  Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        //print(_TextController.text);
+                        await reviews.add({
+                          'name': reviewName,
+                          'rating': sum / 4,
+                          'review': _TextController.text,
+                        });
+                        sum = 0;
+                        Navigator.pop(context);
+                      },
+                      child: Text('Submit'),
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(120, 30),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          backgroundColor: Color(0xD9d52b1c),
+                          foregroundColor: Colors.white,
+                          textStyle: const TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.bold)),
+                    ),
                   ),
                 ],
               ),
