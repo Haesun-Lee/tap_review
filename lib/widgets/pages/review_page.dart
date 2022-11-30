@@ -23,12 +23,12 @@ class _ReviewPageState extends State<ReviewPage> {
   final Stream<QuerySnapshot> reviewList =
       FirebaseFirestore.instance.collection('cart').snapshots();
 
+  String myID = '';
   List<String> reviewID = [];
-
   Future getReviewID() async {
     await FirebaseFirestore.instance.collection('cart').get().then(
           (snapshot) => snapshot.docs.forEach((document) {
-            print(document.reference);
+            myID = document.id.toString();
             reviewID.add(document.reference.id);
           }),
         );
@@ -60,6 +60,7 @@ class _ReviewPageState extends State<ReviewPage> {
 
             return ListView(
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                getReviewID();
                 Map<String, dynamic> data =
                     document.data()! as Map<String, dynamic>;
                 return ListTile(
@@ -67,7 +68,7 @@ class _ReviewPageState extends State<ReviewPage> {
                   subtitle: Text(data['description']),
                   leading: Image.network(data['imageUrl']),
                   onTap: () {
-                    _bottomSheet(context, data['name'], getReviewID());
+                    _bottomSheet(context, data['name'], myID);
                   },
                 );
               }).toList(),
@@ -77,7 +78,7 @@ class _ReviewPageState extends State<ReviewPage> {
   }
 }
 
-_bottomSheet(context, reviewName, reviewID) {
+_bottomSheet(context, reviewName, myID) {
   CollectionReference reviews = FirebaseFirestore.instance.collection('review');
   final TextEditingController _TextController = TextEditingController();
   double sum = 0;
@@ -161,33 +162,6 @@ _bottomSheet(context, reviewName, reviewID) {
                   ),
                   ListTile(
                     leading: Text(
-                      'Appearance          ',
-                      style: TextStyle(
-                          fontSize: 18.0, fontWeight: FontWeight.bold),
-                    ),
-                    title: RatingBar.builder(
-                      itemSize: 25,
-                      initialRating: 0,
-                      minRating: 1,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                      itemBuilder: (context, _) => Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                      ),
-                      onRatingUpdate: (rating) {
-                        print(rating);
-                        sum += rating;
-                      },
-                    ),
-                  ),
-                  Divider(
-                    height: 1.0,
-                  ),
-                  ListTile(
-                    leading: Text(
                       'Speed of Service',
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
@@ -239,6 +213,11 @@ _bottomSheet(context, reviewName, reviewID) {
                           'review': _TextController.text,
                         });
                         sum = 0;
+                        print("ssssss" + myID);
+                        FirebaseFirestore.instance
+                            .collection('cart')
+                            .doc(myID)
+                            .delete();
                         Navigator.pop(context);
                       },
                       child: Text('Submit'),
