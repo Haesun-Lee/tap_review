@@ -105,11 +105,11 @@ _bottomSheet(context, reviewName, reviewID) {
                     ),
                   ),
                   Divider(
-                    height: 2.0,
+                    height: 1.0,
                   ),
                   ListTile(
                     leading: Text(
-                      'Taste                   ',
+                      'Taste                     ',
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
@@ -131,11 +131,11 @@ _bottomSheet(context, reviewName, reviewID) {
                     ),
                   ),
                   Divider(
-                    height: 2.0,
+                    height: 1.0,
                   ),
                   ListTile(
                     leading: Text(
-                      'Portion                ',
+                      'Portion                  ',
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
@@ -157,11 +157,11 @@ _bottomSheet(context, reviewName, reviewID) {
                     ),
                   ),
                   Divider(
-                    height: 2.0,
+                    height: 1.0,
                   ),
                   ListTile(
                     leading: Text(
-                      'Appearance        ',
+                      'Appearance          ',
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
@@ -184,7 +184,7 @@ _bottomSheet(context, reviewName, reviewID) {
                     ),
                   ),
                   Divider(
-                    height: 2.0,
+                    height: 1.0,
                   ),
                   ListTile(
                     leading: Text(
@@ -211,33 +211,7 @@ _bottomSheet(context, reviewName, reviewID) {
                     ),
                   ),
                   Divider(
-                    height: 2.0,
-                  ),
-                  ListTile(
-                    leading: Text( 
-                      'Overall                  ',
-                      style: TextStyle(
-                          fontSize: 18.0, fontWeight: FontWeight.bold),
-                    ),
-                    title: RatingBar.builder(
-                      itemSize: 25,
-                      initialRating: 0,
-                      minRating: 1,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                      itemBuilder: (context, _) => Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                      ),
-                      onRatingUpdate: (rating) {
-                        sum += rating;
-                      },
-                    ),
-                  ),
-                  Divider(
-                    height: 2.0,
+                    height: 1.0,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(18.0),
@@ -261,7 +235,7 @@ _bottomSheet(context, reviewName, reviewID) {
                         //print(_TextController.text);
                         await reviews.add({
                           'name': reviewName,
-                          'rating': sum / 3,
+                          'rating': sum / 4,
                           'review': _TextController.text,
                         });
                         sum = 0;
